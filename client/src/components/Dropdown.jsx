@@ -17,7 +17,7 @@ export const Dropdown = ({ onApplyFilter, allTrips }) => {
 
     if (filters.destination) {
       filtered = filtered.filter((trip) =>
-        trip.location.includes(filters.destination)
+        trip.destination.includes(filters.destination)
       );
     }
 
@@ -41,7 +41,7 @@ export const Dropdown = ({ onApplyFilter, allTrips }) => {
           "Filter Rating:",
           filters.rating
         );
-        return trip.rating >= Number(filters.rating);
+        return trip.rate >= Number(filters.rating);
       });
     }
 

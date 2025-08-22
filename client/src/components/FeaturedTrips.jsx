@@ -1,10 +1,20 @@
 import React from "react";
 import trips from "../data/trips";
 import TripCard from "./TripCard";
-import { Link, useNavigate } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import { getAllTours } from "../api/tours";
 
 const FeaturedTrips = () => {
   const navigate = useNavigate();
+  const [tours, setTours] = useState([]);
+  useEffect(() => {
+    getAllTours().then((data) => {
+      console.log(data);
+      setTours(data);
+    });
+  }, []);
   return (
     <div className="py-10 px-0 max-w-[1200px] mx-auto ">
       <h2 className="text-2xl font-bold mb-1 text-center text-gray-800 mx-auto">
@@ -16,8 +26,8 @@ const FeaturedTrips = () => {
       </h4>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-10 sm:gap-15 md:gap-20 xl:gap-50 mx-auto">
-        {trips.slice(0, 4).map((trip) => (
-          <TripCard key={trip.id} {...trip} />
+        {tours.slice(0, 4).map((trip,index) => (
+          <TripCard key={index} {...trip} />
         ))}
       </div>
       <Link to="/tours">

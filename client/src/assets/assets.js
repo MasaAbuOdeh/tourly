@@ -9,6 +9,7 @@ import Pali from './Pali.jpg'
 import London from './london.jpg'
 import Trabzon from './Trabzon.jpg'
 import plan1 from './plan1.jpg'
+import travel from './travel.jpg'
 
 
 
@@ -24,6 +25,7 @@ export const assets = {
     Pali,
     London,
     Trabzon,
-    plan1
+    plan1,
+    travel
 
 }

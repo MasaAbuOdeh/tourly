@@ -29,7 +29,7 @@ export const loginUser = async (req, res) => {
       );
       if (isPasswordCorrect) {
         const token = jwt.sign(
-          { id: existingUser._id },
+          { id: existingUser._id, role: existingUser.role },
           process.env.JWT_SECRET,
           { expiresIn: "1d" }
         );
@@ -38,6 +38,7 @@ export const loginUser = async (req, res) => {
           token,
           user: {
             id: existingUser._id,
+            role: existingUser.role,
             username: existingUser.username,
             email: existingUser.email,
           },

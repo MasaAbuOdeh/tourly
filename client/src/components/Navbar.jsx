@@ -3,6 +3,9 @@ import { assets } from "../assets/assets.js";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const isLoggedIn = !!localStorage.getItem("token");
+  const username = localStorage.getItem("username");
+  console.log(username);
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
@@ -71,12 +74,30 @@ const Navbar = () => {
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
-        <button className="text-black text-2xl px-8 py-2.5 rounded-full ml-4 transition-all duration-500">
-          Login
-        </button>
-        <button className="bg-[#39B5CE] text-white px-4 py-2 rounded-full hover:opacity-70">
-          Register
-        </button>
+        {!isLoggedIn ? (
+          <Link to="/login">
+            <button className="text-black text-2xl px-8 py-2.5 rounded-full ml-4 transition-all duration-500">
+              Login
+            </button>
+          </Link>
+        ) : (
+          <h1 className="text-black text-2xl px-8 py-2.5 "> {username}</h1>
+        )}
+        {!isLoggedIn ? (
+          <button className="bg-[#39B5CE] text-white px-4 py-2 rounded-full hover:opacity-70">
+            Register
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              window.location.href = "/";
+            }}
+            className="text-black text-2xl px-8 py-2.5 rounded-full ml-4 transition-all duration-500"
+          >
+            Logout
+          </button>
+        )}
       </div>
 
       {/* Mobile Menu Button */}
