@@ -1,6 +1,7 @@
 import React from "react";
 import { assets } from "../assets/assets.js";
 import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const isLoggedIn = !!localStorage.getItem("token");
@@ -81,7 +82,10 @@ const Navbar = () => {
             </button>
           </Link>
         ) : (
-          <h1 className="text-black text-2xl px-8 py-2.5 "> {username}</h1>
+          <div className="ml-5 bottom-8 left-5 flex items-center text-gray-600">
+            <FaUser />
+            <h1 className="text-black text-2xl px-3 py-2.5 "> {username}</h1>
+          </div>
         )}
         {!isLoggedIn ? (
           <button className="bg-[#39B5CE] text-white px-4 py-2 rounded-full hover:opacity-70">

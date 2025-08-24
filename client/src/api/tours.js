@@ -12,3 +12,16 @@ export const getTour = async (id) => {
   const result = await res.json();
   return result;
 };
+
+export const DeleteTour = async (id,token) => {
+  const res = await fetch(`${API_URL}/deleteTour/${id}`, {
+    method:"DELETE",
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Beares ${token}`,
+    },
+  });
+  if (!res.ok) throw new Error("Failed to fetch tour");
+  const result = await res.json();
+  return result;
+};

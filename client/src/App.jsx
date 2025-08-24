@@ -11,6 +11,9 @@ import Login from "./pages/Login";
 import Register from "./pages/register";
 import Dashboard from "./pages/Dashboard";
 import Sidebar from "./components/Sidebar";
+import AddTour from "./pages/AddTour";
+import ListTours from "./pages/ListTours";
+import UpdateTour from "./pages/UpdateTour";
 
 const App = () => {
   const location = useLocation();
@@ -18,7 +21,6 @@ const App = () => {
     location.pathname === "/login" ||
     location.pathname === "/register" ||
     location.pathname.includes("/admin");
-  const showSlidebar = location.pathname.includes("/admin");
   const isAdminPage = location.pathname.startsWith("/admin");
   return (
     <>
@@ -30,6 +32,12 @@ const App = () => {
             <Routes>
               <Route path="/admin/dashboard" element={<Dashboard />} />
               {/* ممكن تضيفي مسارات تانية للـ admin هون */}
+              <Route path="/admin/AddTour" element={<AddTour />}></Route>
+              <Route
+                path="/admin/ListTours"
+                element={<ListTours/>}
+              ></Route>
+              <Route path="/admin/updateTour/:id" element={<UpdateTour/>}></Route>
             </Routes>
           </div>
         </div>

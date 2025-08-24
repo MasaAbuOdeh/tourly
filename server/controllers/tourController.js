@@ -1,4 +1,5 @@
 import Tour from "../models/tour.js";
+import cloudinary from "../utils/cloudinary.js";
 
 export const CreateTour = async (req, res) => {
   const {
@@ -8,11 +9,17 @@ export const CreateTour = async (req, res) => {
     rate,
     comments,
     description,
-    images,
     date,
   } = req.body;
 
   try {
+    const images =[];
+    for(let file of req.files){
+      const result = await cloudinary.uploader.upload(file.path,{
+        folder:"tours"
+      })
+      images.push(result.secure_url);
+    }
     const newTour = new Tour({
       title,
       destination,
@@ -56,18 +63,35 @@ export const getTour = async (req, res) => {
 
 export const updateTour = async (req, res) => {
   const id = req.params.id;
+
   try {
     const tour = await Tour.findById(id);
     if (!tour) {
-      res.status(404).json({ message: "not found" });
+      return res.status(404).json({ message: "Tour not found" });
     }
 
+    // تحديث الحقول النصية/الرقمية من req.body
     Object.keys(req.body).forEach((key) => {
       tour[key] = req.body[key];
     });
 
-    const updateTour = await tour.save();
-    res.status(200).json({ data: updateTour, message: "updated successfully" });
+    // إذا فيه صور جديدة جاية من multer
+    if (req.files && req.files.length > 0) {
+      const uploadedImages = [];
+
+      for (let file of req.files) {
+        const result = await cloudinary.uploader.upload(file.path, {
+          folder: "tours",
+        });
+        uploadedImages.push(result.secure_url);
+      }
+
+      // تحديث الصور (ممكن تستبدل أو تضيف حسب ما بدك)
+      tour.images = uploadedImages;
+    }
+
+    const updatedTour = await tour.save();
+    res.status(200).json({ data: updatedTour, message: "Tour updated successfully" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

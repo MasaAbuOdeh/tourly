@@ -46,7 +46,7 @@ const TourDetails = () => {
           />
           <Reviews />
         </div>
-        <BookingSide Features={selectedTrip.features} price={tour.price} />
+        <BookingSide Features={selectedTrip.features} price={tour.price} tourId = {id}/>
       </div>
     </>
   );
