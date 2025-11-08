@@ -22,14 +22,14 @@ export const Dropdown = ({ onApplyFilter, allTrips }) => {
     }
 
     if (filters.priceRange) {
-      if (filters.priceRange === "0-100") {
-        filtered = filtered.filter((trip) => trip.price <= 100);
-      } else if (filters.priceRange === "100-300") {
+      if (filters.priceRange === "0-500") {
+        filtered = filtered.filter((trip) => trip.price <= 500);
+      } else if (filters.priceRange === "500-900") {
         filtered = filtered.filter(
-          (trip) => trip.price > 100 && trip.price <= 300
+          (trip) => trip.price > 500 && trip.price <= 900
         );
-      } else if (filters.priceRange === "300+") {
-        filtered = filtered.filter((trip) => trip.price > 300);
+      } else if (filters.priceRange === "1000+") {
+        filtered = filtered.filter((trip) => trip.price > 900);
       }
     }
 
@@ -59,6 +59,8 @@ export const Dropdown = ({ onApplyFilter, allTrips }) => {
         <option>Istanbul</option>
         <option>Bali</option>
         <option>London</option>
+        <option>Tokyo</option>
+        <option>France</option>
       </select>
 
       <select
@@ -67,9 +69,9 @@ export const Dropdown = ({ onApplyFilter, allTrips }) => {
         onChange={handleChange}
       >
         <option value="">Price Range</option>
-        <option value={"0-100"}>0-100$</option>
-        <option value={"100-300"}>100$-300$</option>
-        <option value={"+300"}>300$+</option>
+        <option value={"0-500"}>0-500$</option>
+        <option value={"500-900"}>500$-900$</option>
+        <option value={"1000+"}>1000$+</option>
       </select>
 
       <select

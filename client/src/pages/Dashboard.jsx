@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardAdmin from "../components/CardAdmin";
 import RecentBookings from "../components/RecentBookings";
+import { getStats } from "../api/stats";
 const Dashboard = () => {
+  const [stats, setStats] = useState({ users: 0, tours: 0, bookings: 0 });
+   useEffect(() => {
+    getStats().then((data) => {
+      if (data) setStats(data);
+    });
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
@@ -12,7 +20,10 @@ const Dashboard = () => {
         <h1 className="text-3xl font-semibold">Dashboard</h1>
         <div className="flex items-center gap-4">
           <span>👤 Masa</span>
-          <button onClick = {handleLogout} className="bg-[#00798C] hover:opacity-70 text-white px-4 py-2 rounded">
+          <button
+            onClick={handleLogout}
+            className="bg-[#00798C] hover:opacity-70 text-white px-4 py-2 rounded"
+          >
             Logout
           </button>
         </div>
@@ -24,9 +35,9 @@ const Dashboard = () => {
       </p>
 
       <div className="flex flex-col md:flex-row gap-4">
-        <CardAdmin label="total Tours" value="5" />
-        <CardAdmin label="total Users" value="100" />
-        <CardAdmin label="total Bookings" value="10" />
+        <CardAdmin label="total Tours" value={stats.tours} />
+        <CardAdmin label="total Users" value={stats.users} />
+        <CardAdmin label="total Bookings" value={stats.bookings} />
       </div>
 
       <RecentBookings />

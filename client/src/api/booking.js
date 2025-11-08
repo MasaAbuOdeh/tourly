@@ -24,4 +24,20 @@ export const CreateBooking = async (name, phone, tourId, guests) => {
   }
 };
 
-
+export const getBookingsToAdmin = async () => {
+  const token = localStorage.getItem("token");
+  try {
+    const res = await fetch(`${API_URL}/getBookingsAdmin`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      method: "GET",
+    });
+    if (!res.ok) throw new Error("Failed to fetch tour");
+    const result = await res.json();
+    return result.data;
+  } catch (err) {
+    console.log(err.message);
+    alert("something went wrong");
+  }
+};

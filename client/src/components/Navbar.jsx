@@ -88,9 +88,11 @@ const Navbar = () => {
           </div>
         )}
         {!isLoggedIn ? (
-          <button className="bg-[#39B5CE] text-white px-4 py-2 rounded-full hover:opacity-70">
-            Register
-          </button>
+          <Link to="/register">
+            <button className="bg-[#39B5CE] text-white px-4 py-2 rounded-full hover:opacity-70">
+              Register
+            </button>
+          </Link>
         ) : (
           <button
             onClick={() => {

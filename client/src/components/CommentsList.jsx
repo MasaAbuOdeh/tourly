@@ -5,7 +5,7 @@ const CommentsList = ({ review }) => {
   return (
     <div className="flex flex-col mb-7">
       <CommentIlement
-        userName={review.userName}
+        userName={review.username}
         date={review.date}
         comment={review.comment}
         rate={review.rate}

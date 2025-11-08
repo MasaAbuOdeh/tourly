@@ -12,7 +12,6 @@ const AddTourForm = () => {
 
   const token = localStorage.getItem("token");
 
-  // دالة لتحديث القيم
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setTourData((prev) => ({
@@ -32,7 +31,6 @@ const AddTourForm = () => {
       formData.append("description", tourData.description);
       formData.append("date", tourData.date);
 
-      // إضافة كل الصور
       if (tourData.images) {
         for (let i = 0; i < tourData.images.length; i++) {
           formData.append("images", tourData.images[i]);
@@ -51,6 +49,14 @@ const AddTourForm = () => {
       if (res.ok) {
         alert("Tour added successfully!");
         console.log("Response:", data);
+        setTourData({
+          title: "",
+          destination: "",
+          price: "",
+          description: "",
+          images: null,
+          date: "",
+        });
       } else {
         alert(data.message || "Failed to add tour");
       }

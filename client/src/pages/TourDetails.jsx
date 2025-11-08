@@ -44,7 +44,7 @@ const TourDetails = () => {
             date={new Date(tour.date).toLocaleDateString("en-GB")}
             description={tour.description}
           />
-          <Reviews />
+          <Reviews tourId={id}/>
         </div>
         <BookingSide Features={selectedTrip.features} price={tour.price} tourId = {id}/>
       </div>

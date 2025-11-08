@@ -5,6 +5,8 @@ import connectDB from "./configs/db.js";
 import router from "./routes/userRoutes.js";
 import tourRoute from "./routes/tourRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
+import statsRoute from "./routes/statsRoute.js";
+import reviewRouter from "./routes/reviewRout.js";
 
 connectDB();
 
@@ -14,6 +16,8 @@ app.use(express.json());
 app.use("/api/users", router);
 app.use("/api/tours/", tourRoute);
 app.use("/api/booking/", bookingRoutes);
+app.use("/api/admin", statsRoute);
+app.use("/api",reviewRouter)
 app.get("/", (req, res) => res.send("API is working fine"));
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`server is workin on ${port}`));

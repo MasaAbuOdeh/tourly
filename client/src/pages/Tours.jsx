@@ -13,7 +13,7 @@ const Tours = () => {
   useEffect(() => {
     const fetchTrips = async () => {
       try {
-        const data = await getAllTours(); // استدعاء الدالة الجاهزة
+        const data = await getAllTours();
         setAllTrips(data);
         setFilteredTrips(data);
         setLoading(false);

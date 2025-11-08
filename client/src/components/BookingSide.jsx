@@ -13,7 +13,7 @@ const BookingSide = ({ Features, price, tourId }) => {
       formData.guest
     );
     console.log(formData.guest);
-    if (!res.ok) throw new Error("can't Add booking");
+    if (!res.ok) {throw new Error("can't Add booking");}
     alert(res.message);
     console.log(res.data);
   };

@@ -45,7 +45,10 @@ export const getAllUserBookings = async (req, res) => {
 
 export const getAllBookingdAdmin = async (req, res) => {
   try {
-    const Bookings = await Booking.find();
+    const Bookings = await Booking.find()
+      .populate("user", "username")
+      .populate("tour", "title");
+
     if (!Bookings) {
       res.status(404).json({ message: "No bookings to show" });
       return;
@@ -85,5 +88,3 @@ export const updateBooking = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
-
