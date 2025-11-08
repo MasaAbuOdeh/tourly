@@ -14,7 +14,7 @@ It allows users to explore destinations, book trips, and discover new places.
 ---
 
 ### 🛠️ Tech Stack
-- **Frontend:** React.js, CSS
+- **Frontend:** React.js, Tailwind
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
 - **Tools:** Git, Postman, VS Code
